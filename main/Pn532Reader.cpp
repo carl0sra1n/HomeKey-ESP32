@@ -11,6 +11,16 @@ Pn532Reader::~Pn532Reader() {
     stop();
 }
 
+/**
+ * @brief Initialize the PN532 reader and configure RF settings.
+ *
+ * Allocates the SPI transport and frontend if not already created,
+ * establishes communication with the chip, verifies firmware version,
+ * and sets up RF configurations. Releases resources via stop()
+ * if any initialization step fails.
+ *
+ * @return true if initialization succeeded, false otherwise.
+ */
 bool Pn532Reader::init() {
     if (!m_transport) {
         m_transport = new pn532::SpiTransport(
